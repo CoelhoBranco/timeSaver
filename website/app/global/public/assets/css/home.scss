@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.home {
+
+    h1 {
+        font-family: 'Anto', sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        background-image: linear-gradient(180deg, #000 0%, #098E97 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .navegacao {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 7%;
+            border: 1px solid #03989E;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            width: 110px;
+            height: 56px;
+        }
+    }
+
+    .content {
+        padding: 0 5% 0 5%;
+
+        .titulo-secao {
+            font-weight: 700;
+            font-size: 14px;
+            color: #03989E;
+            padding-left: 2%;
+
+            .status {
+                border: none;
+                margin: -7%;
+                color: #6AFC35;
+            }
+
+            hr {
+
+                border: 1px solid #098E97;
+                width: 100%;
+            }
+        }
+    }
+
+    .box-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .box-info-single {
+        border: 4px solid #03989E;
+        margin: 2%;
+        border-radius: 10px;
+        width: 138.41px;
+        height: 140px;
+        left: 24px;
+        top: 394px;
+
+        .info-text {
+            h2 {
+                font-weight: 700;
+                font-size: 14px;
+                color: #03989E;
+            }
+
+            .dado {
+                font-weight: 700;
+                font-size: 48px;
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
+
+
+@media only screen and (orientation: landscape) and (min-width: 800px) {
+
+    .home {
+        h1 {
+            font-size: 40px;
+        }
+
+        a {
+            font-size: 20px;
+            width: 162.5px;
+            height: 70px;
+            left: 528px;
+            top: 240px;
+            margin: 5%;
+        }
+
+        .content {
+            .titulo-secao {
+                font-size: 18px;
+
+                .status {
+                    margin: 0 -3%;
+
+
+                }
+            }
+        }
+
+        .box-info {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 15% 0 15%;
+        }
+
+        .box-info-single {
+            width: 348px;
+            height: 352px;
+            left: 138px;
+            top: 480px;
+
+            .info-text {
+                h2 {
+                    font-size: 24px;
+                }
+
+                .dado {
+                    font-size: 128px;
+                }
+            }
+        }
+    }
+
+}

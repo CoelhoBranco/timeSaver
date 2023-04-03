@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap");
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+form h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 28px;
+  background-image: linear-gradient(180deg, #000 0%, #098E97 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  float: left;
+}
+form p {
+  font-size: 12px;
+  color: #454545;
+}
+form p a {
+  color: #098E97;
+  text-decoration: none;
+}
+form .fields {
+  display: flex;
+  flex-direction: column;
+}
+form .fields label {
+  text-align: left;
+  margin: 3% 0;
+  font-size: 14px;
+}
+form .fields input {
+  border: 1px solid #454545;
+  border-radius: 10px;
+  width: 290px;
+  height: 40px;
+  left: 577px;
+}
+form .esqueceu {
+  font-size: 12px;
+  color: #098E97;
+  text-decoration: none;
+}
+form .btn-login {
+  background: #03989E;
+  border: 1px solid #03989E;
+  border-radius: 10px;
+  width: 290px;
+  height: 40px;
+  color: #fff;
+  margin: 10% 0;
+  font-size: 14px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50%;
+}
+.footer p {
+  display: flex;
+  font-size: 12px;
+  color: #454545;
+}
+.footer p a {
+  color: #098E97;
+  text-decoration: none;
+}
+
+@media only screen and (orientation: landscape) and (min-width: 800px) {
+  form h1 {
+    font-size: 40px;
+  }
+  form p {
+    font-size: 14px;
+  }
+  form .fields label {
+    font-size: 18px;
+  }
+  form .esqueceu {
+    font-size: 14px;
+  }
+  form .btn-login {
+    font-size: 18px;
+  }
+  form .btn-login:hover {
+    border: 1px solid #013939;
+    background: #013939;
+  }
+}/*# sourceMappingURL=style.css.map */

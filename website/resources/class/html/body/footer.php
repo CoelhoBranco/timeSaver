@@ -1,0 +1,46 @@
+<?php
+
+namespace ModulePHP\HTML;
+
+use ModulePHP\MVC;
+use ModulePHP\Base;
+
+class Footer
+{
+    private $classname;
+    private $tagname;
+    private $content;
+    public $base;
+
+    function __construct()
+    {
+        ob_start();
+
+        $this->classname = get_class($this);
+        $this->tagname = strtolower($this->classname);
+
+        MVC::Base("body/$this->tagname");
+
+        if (class_exists("ModulePHP\Base\{$this->classname}")) {
+            echo "Footer exist";
+            $this->base = new ("ModulePHP\Base\{$this->classname}");
+            $this->content = $this->base->render();
+        } else {
+            echo "Footer not exist";
+            $this->content = ob_get_contents();
+        }
+
+        ob_end_clean();
+    }
+
+    function render()
+    {
+        $html = <<<content
+        <{$this->tagname}>
+            $this->content;
+        </{$this->tagname}>
+        content;
+
+        return $html;
+    }
+}

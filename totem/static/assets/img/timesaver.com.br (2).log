@@ -1,0 +1,11 @@
+timesaver.com.br F8UrM4WcWdI3QbK8Bw2JXA - - [23/Mar/2023:01:11:10 +0000] "GET / HTTP/1.1" 500 531 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" {254:707,8868}
+timesaver.com.br F8UrM4WcWdI3QbK8Bw2JXA - - [23/Mar/2023:01:36:05 +0000] "GET / HTTP/1.1" 500 531 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36" {254:707,1207}
+timesaver.com.br mD/PiAQLUwv6LjTPYgaTBA - - [23/Mar/2023:06:45:26 +0000] "GET / HTTP/2.0" 500 531 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0" {86:649,34480}
+timesaver.com.br mD/PiAQLUwv6LjTPYgaTBA - - [23/Mar/2023:06:45:27 +0000] "GET / HTTP/2.0" 500 531 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0" {89:649,35056}
+timesaver.com.br mD/PiAQLUwv6LjTPYgaTBA - - [23/Mar/2023:06:45:27 +0000] "GET /favicon.ico HTTP/1.1" 500 531 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0" {825:5950,1120}
+timesaver.com.br mD/PiAQLUwv6LjTPYgaTBA - - [23/Mar/2023:06:45:28 +0000] "GET /favicon.ico HTTP/1.1" 500 531 "-" "Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0" {829:5982,2367}
+timesaver.com.br 8KbIIxJPFxJ+6kj/3QAe6A - - [23/Mar/2023:08:57:54 +0000] "GET / HTTP/1.1" 500 531 "-" "-" {674:5950,9533}
+timesaver.com.br f86VgNHNUwJHNfWoJX2WQw - - [23/Mar/2023:15:31:15 +0000] "GET / HTTP/1.1" 500 531 "-" "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)" {169:707,722835}
+timesaver.com.br fn6IdVb3XSYI+72a8iyueA - - [23/Mar/2023:17:08:57 +0000] "GET /wp-content/themes/houzez/style.css HTTP/1.1" 500 531 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36" {241:707,7737}
+timesaver.com.br Zu5o8nP22EfJo0qjwSXnvg - - [23/Mar/2023:17:28:19 +0000] "GET / HTTP/1.1" 500 531 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" {263:707,1341}
+timesaver.com.br Zu5o8nP22EfJo0qjwSXnvg - - [23/Mar/2023:17:28:19 +0000] "GET / HTTP/1.1" 500 531 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" {858:5950,1475}

@@ -1,0 +1,8 @@
+1679330882606	geckodriver	INFO	Listening on 127.0.0.1:63224
+1679330885691	mozrunner::runner	INFO	Running command: "D:\\Programas\\firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63225" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\leona\\AppData\\Local\\Temp\\rust_mozprofileNfmWUa"
+[Child 5004] ###!!! ABORT: Aborting on channel error.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2143
+[Child 5004] ###!!! ABORT: Aborting on channel error.: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/glue/MessageChannel.cpp, line 2143
+1679331096186	geckodriver	INFO	Listening on 127.0.0.1:63763
+1679331099240	mozrunner::runner	INFO	Running command: "D:\\Programas\\firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63764" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\leona\\AppData\\Local\\Temp\\rust_mozprofileFRhOm5"
+1679331135322	geckodriver	INFO	Listening on 127.0.0.1:63899
+1679331138398	mozrunner::runner	INFO	Running command: "D:\\Programas\\firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63900" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\leona\\AppData\\Local\\Temp\\rust_mozprofileQ1ZbvA"

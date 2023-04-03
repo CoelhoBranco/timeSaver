@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.confirmar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        font-family: 'Anton', sans-serif;
+        font-size: 28px;
+        background-image: linear-gradient(180deg, #000 0%, #098E97 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        justify-content: left;
+    }
+
+    p {
+        font-size: 14px;
+        color: #000;
+    }
+}
+
+.content {
+    .titulo-secao {
+        font-weight: 700;
+        font-size: 14px;
+        padding: 2%;
+        color: #098E97;
+
+
+        hr {
+            border: 1px solid #098E97;
+            width: 100%;
+        }
+    }
+
+    .dados {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding-left: 15px;
+
+        span {
+            font-size: 14px;
+            color: #000;
+        }
+    }
+
+}
+
+.botoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 2%;
+
+    .btn-voltar {
+        border: 1px solid #03989E;
+        background: #fff;
+        border-radius: 10px;
+        width: 125px;
+        height: 34px;
+        color: #03989E;
+        font-size: 14px;
+        margin-top: 5vw;
+    }
+
+    .btn-avancar {
+        border: 1px solid #03989E;
+        background: #03989E;
+        border-radius: 10px;
+        width: 125px;
+        height: 34px;
+        color: #FFFFFF;
+        font-size: 14px;
+        margin-top: 5vw;
+    }
+}
+
+
+
+
+@media only screen and (orientation: landscape) and (min-width: 800px) {
+    .confirmar {
+
+        h1 {
+            font-size: 40px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+    .content {
+        .titulo-secao {
+            font-size: 18px;
+        }
+
+        .dados {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+
+            span {
+                font-size: 18px;
+            }
+        }
+
+    }
+
+    .botoes {
+
+        .btn-voltar {
+            width: 125px;
+            height: 40px;
+            left: 1141px;
+            font-size: 18px;
+        }
+
+        .btn-voltar:hover {
+            border: 1px solid #013939;
+            color: #013939;
+        }
+
+        .btn-avancar {
+            width: 125px;
+            height: 40px;
+            left: 1141px;
+            font-size: 18px;
+        }
+
+        .btn-avancar:hover {
+            border: 1px solid #013939;
+            background: #013939;
+        }
+
+    }
+}

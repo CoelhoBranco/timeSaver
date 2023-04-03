@@ -1,0 +1,134 @@
+.atualizar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.atualizar h1 {
+  font-family: "Anton", sans-serif;
+  font-size: 28px;
+  background-image: linear-gradient(180deg, #000 0%, #098E97 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  justify-content: left;
+}
+.atualizar p {
+  font-size: 14px;
+  color: #000;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+.content .plataforma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+}
+.content .plataforma p {
+  background-color: #03989E;
+  border-radius: 10px;
+  padding: 10px 110px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px 10px 0px 0px;
+}
+.content .plataforma .logosenha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: none;
+  border: 2px solid #03989E;
+  background-color: #fff;
+  border-radius: 0px 0px 10px 10px;
+  padding: 40px 4px;
+  margin-top: -15px;
+}
+.content .plataforma .logosenha .img {
+  padding: 3px 20px;
+  margin: -35px 0 30px 0;
+}
+.content .plataforma .logosenha .img img {
+  width: 130px;
+}
+.content .plataforma .logosenha .form-group .fields {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2vw;
+}
+.content .plataforma .logosenha .form-group .fields label {
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 1vw;
+}
+.content .plataforma .logosenha .form-group .fields input {
+  border: 1px solid #454545;
+  border-radius: 10px;
+  width: 250px;
+  height: 34px;
+  left: 577px;
+}
+.content .plataforma .btn-avancar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: 1px solid #03989E;
+  background: #03989E;
+  border-radius: 10px;
+  width: 125px;
+  height: 34px;
+  color: #FFFFFF;
+  font-size: 14px;
+  margin-top: 5vw;
+}
+
+@media only screen and (orientation: landscape) and (min-width: 800px) {
+  .atualizar h1 {
+    font-size: 40px;
+  }
+  .atualizar p {
+    font-size: 18px;
+  }
+  .content .plataforma p {
+    padding: 15px 130px;
+    font-size: 24px;
+  }
+  .content .plataforma .logosenha {
+    padding: 45px 41px;
+    margin-top: -25px;
+  }
+  .content .plataforma .logosenha .img {
+    padding: 8px 50px;
+    margin-top: -25px;
+  }
+  .content .plataforma .logosenha .img img {
+    width: 150px;
+  }
+  .content .plataforma .logosenha .form-group .fields label {
+    font-size: 18px;
+  }
+  .content .plataforma .btn-avancar {
+    width: 125px;
+    height: 40px;
+    left: 1141px;
+    font-size: 18px;
+  }
+  .content .plataforma .btn-avancar:hover {
+    border: 1px solid #013939;
+    background: #013939;
+  }
+}/*# sourceMappingURL=atualizar-senha.css.map */

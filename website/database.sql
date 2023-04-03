@@ -1,0 +1,121 @@
+#CREATE database IF NOT exists 4171852_timesaver;
+USE 4171852_timesaver;
+CREATE TABLE IF NOT EXISTS Sessions (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    UserID INT UNSIGNED DEFAULT 1,
+    PHPsession_id VARCHAR(255),
+    UserIP VARCHAR(255),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Userlevel (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(50),
+    userlevel_id INT DEFAULT 1,
+    recoverycode VARCHAR(255),
+    password VARCHAR(255),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Clinicas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    clinica_id INT NOT NULL,
+    CPNJ VARCHAR(255),
+    CNES VARCHAR(255),
+    CEP VARCHAR(255),
+    UF VARCHAR(255),
+    cidade VARCHAR(255),
+    bairro VARCHAR(255),
+    endereco VARCHAR(255),
+    numero VARCHAR(255),
+    complemento VARCHAR(255),
+    email VARCHAR(255),
+    telefone VARCHAR(255),
+    senha VARCHAR(255),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Funcionarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Profissionais (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    CPF VARCHAR(255) NOT NULL,
+    conselho_id INT NOT NULL,
+    UF VARCHAR(255) NOT NULL,
+    registro INT NOT NULL,
+    CBO VARCHAR(255) NOT NULL,
+    cod_operadora VARCHAR(255) NOT NULL,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Conselhos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    conselho VARCHAR(255) NOT NULL UNIQUE,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Atividade_diaria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    atendimento_contador INT NOT NULL DEFAULT 0,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS Empresas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    empresa_name VARCHAR(255) NOT NULL UNIQUE,
+    user VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lastchange_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT IGNORE INTO `userlevel` VALUES (1,'admin','2023-03-20 06:05:28');
+
+
+INSERT IGNORE INTO Conselhos (conselho)
+VALUES ("CBOO"),
+    ("COREM"),
+    ("CRAS"),
+    ("CRBM"),
+    ("CREF"),
+    ("CREFITO"),
+    ("CRF"),
+    ("CRFA"),
+    ("CRM"),
+    ("CRN"),
+    ("CRO"),
+    ("CRP"),
+    ("CRTR"),
+    ("ABQ"),
+    ("RMS");
+INSERT IGNORE INTO Empresas (user_id, empresa_name, user, password)
+VALUES (1, 'Unimed', 'con2546', 'procto1200'),
+    (1, 'Stenci', '74655523549', 'crm1234');
+INSERT IGNORE INTO Users (
+        name,
+        username,
+        password,
+        email
+    )
+VALUES (
+        "82170701052",
+        "82170701052",
+        "$2y$10$7loYLdW44v0LBqngO8BreexhpIxNqHPlouvL92NIifWE1hYETUBbO",
+        "teste@localhost"
+    )

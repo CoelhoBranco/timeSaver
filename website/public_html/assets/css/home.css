@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap");
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.home h1 {
+  font-family: "Anto", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  background-image: linear-gradient(180deg, #000 0%, #098E97 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.home .navegacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home .navegacao a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 15px 5%;
+  border: 1px solid #03989E;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  width: 110px;
+  height: 56px;
+}
+.home .content {
+  padding: 0 5% 0 5%;
+}
+.home .content .titulo-secao {
+  font-weight: 700;
+  font-size: 14px;
+  color: #03989E;
+  padding-left: 2%;
+}
+.home .content .titulo-secao .status {
+  border: none;
+  margin: 0%;
+  color: #6AFC35;
+}
+.home .content .titulo-secao hr {
+  border: 1px solid #098E97;
+  width: 100%;
+}
+.home .box-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.home .box-info-single {
+  border: 4px solid #03989E;
+  margin: 2%;
+  border-radius: 10px;
+  width: 138.41px;
+  height: 140px;
+  left: 24px;
+  top: 394px;
+}
+.home .box-info-single .info-text h2 {
+  font-weight: 700;
+  font-size: 14px;
+  color: #03989E;
+}
+.home .box-info-single .info-text .dado {
+  font-weight: 700;
+  font-size: 48px;
+}
+.home .box-info-single .info-text p {
+  margin: 0;
+}
+
+@media only screen and (orientation: landscape) and (min-width: 800px) {
+  .home h1 {
+    font-size: 40px;
+    margin: 0 7%;
+  }
+  .home a {
+    font-size: 20px;
+    width: 162.5px;
+    height: 70px;
+    left: 528px;
+    top: 240px;
+    margin: 5%;
+  }
+  .home .content .titulo-secao {
+    font-size: 18px;
+  }
+  .home .content .titulo-secao .status {
+    margin: 0 0%;
+  }
+  .home .box-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 15% 0 15%;
+  }
+  .home .box-info-single {
+    width: 348px;
+    height: 352px;
+    left: 138px;
+    top: 480px;
+  }
+  .home .box-info-single .info-text h2 {
+    font-size: 24px;
+  }
+  .home .box-info-single .info-text .dado {
+    font-size: 128px;
+  }
+}/*# sourceMappingURL=home.css.map */
