@@ -131,6 +131,8 @@ class Unimed:
                 logging.error(e)
                 #print(e)
             self.interation.write(selector, numbers[i], method='id')
+        
+            time.sleep(1)
     
     def click_send(self):
         self.interation.click('//*[@id="ctl00_ctl00_conteudo_btnEnviar"]')
