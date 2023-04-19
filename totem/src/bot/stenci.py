@@ -145,7 +145,7 @@ class Stenci:
         self.clicks_select_final()
         
         el = '//*[@id="modal-appointment"]/div/div[2]/div[3]/button[3]'
-        input('travou antes de dar problema?')
+        
         self.interation.click_js(el, time=40)
         
         #js= 'document.querySelector("#modal-appointment > div > div.modal-container > div.modal-footer > button.btn.btn-gray.mr-2").click()'
