@@ -20,8 +20,8 @@ class Login:
         return True
     
 
-    def set_password(self, path, value):
-        self.interation.write(path, value)
+    def set_password(self, path, value, method = 'xpath'):
+        self.interation.write(path, value, method)
         return True
     
 

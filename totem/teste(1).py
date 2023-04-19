@@ -1,6 +1,2 @@
-from unidecode import unidecode
-
-medico = 'Márcos dé Abreu Bonardi (Proctologia)'
-' '
-medico = unidecode(medico)
-print(medico)
+for i in range(1, 6):
+    print(i)

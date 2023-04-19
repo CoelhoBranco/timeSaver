@@ -103,7 +103,7 @@ class Stenci:
         return values 
     
     
-    def finalizar(self, ):
+    def finalizar(self):
         
         self.interation.click('//*[@id="modal-appointment"]/div/div[2]/div[2]/div/ul/li[2]/a')
         #time.sleep(1)
@@ -145,8 +145,10 @@ class Stenci:
         self.clicks_select_final()
         
         el = '//*[@id="modal-appointment"]/div/div[2]/div[3]/button[3]'
-        self.interation.click(el, time=40)
-        js= 'document.querySelector("#modal-appointment > div > div.modal-container > div.modal-footer > button.btn.btn-gray.mr-2").click()'
+        input('travou antes de dar problema?')
+        self.interation.click_js(el, time=40)
+        
+        #js= 'document.querySelector("#modal-appointment > div > div.modal-container > div.modal-footer > button.btn.btn-gray.mr-2").click()'
         #self.driver.execute_script(js)
         #input('finalizar')
         #self.interation.key(input_xpath, Keys.DOWN)

@@ -3207,3 +3207,20 @@ Backtrace:
 	RtlGetAppContainerNamedObjectPath [0x77087BBE+286]
 	RtlGetAppContainerNamedObjectPath [0x77087B8E+238]
 
+2023/04/19 12:44:54 - INFO - ====== WebDriver manager ======
+2023/04/19 12:44:55 - INFO - Get LATEST chromedriver version for google-chrome 112.0.5615
+2023/04/19 12:44:55 - INFO - There is no [win32] chromedriver for browser 112.0.5615 in cache
+2023/04/19 12:44:55 - INFO - About to download new driver from https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_win32.zip
+2023/04/19 12:44:57 - INFO - Driver has been saved in cache [C:\Users\leona\.wdm\drivers\chromedriver\win32\112.0.5615]
+2023/04/19 12:45:29 - INFO - ====== WebDriver manager ======
+2023/04/19 12:45:29 - INFO - Get LATEST chromedriver version for google-chrome 112.0.5615
+2023/04/19 12:45:30 - INFO - Driver [C:\Users\leona\.wdm\drivers\chromedriver\win32\112.0.5615\chromedriver.exe] found in cache
+2023/04/19 12:49:34 - INFO - ====== WebDriver manager ======
+2023/04/19 12:49:34 - INFO - Get LATEST chromedriver version for google-chrome 112.0.5615
+2023/04/19 12:49:35 - INFO - Driver [C:\Users\leona\.wdm\drivers\chromedriver\win32\112.0.5615\chromedriver.exe] found in cache
+2023/04/19 12:50:39 - INFO - ====== WebDriver manager ======
+2023/04/19 12:50:39 - INFO - Get LATEST chromedriver version for google-chrome 112.0.5615
+2023/04/19 12:50:40 - INFO - Driver [C:\Users\leona\.wdm\drivers\chromedriver\win32\112.0.5615\chromedriver.exe] found in cache
+2023/04/19 12:51:51 - INFO - ====== WebDriver manager ======
+2023/04/19 12:51:51 - INFO - Get LATEST chromedriver version for google-chrome 112.0.5615
+2023/04/19 12:51:52 - INFO - Driver [C:\Users\leona\.wdm\drivers\chromedriver\win32\112.0.5615\chromedriver.exe] found in cache
