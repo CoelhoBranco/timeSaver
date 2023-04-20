@@ -16,9 +16,13 @@ from selenium.webdriver.common.by import By
 
 sys.path.append(os.getcwd())
 
-from src.interation.login import Login
+#from src.interation.login import Login
+#from src.interation import Interation
 
+from src.interation.login import Login
 from src.interation import Interation
+
+
 logging.basicConfig(filename='logs.log', filemode='a',
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO, encoding="UTF-8")
@@ -145,8 +149,9 @@ class Stenci:
         self.clicks_select_final()
         
         el = '//*[@id="modal-appointment"]/div/div[2]/div[3]/button[3]'
-        
+        #//*[@id="modal-appointment"]/div/div[2]/div[3]/button[3]
         self.interation.click_js(el, time=40)
+        logging.info(self.interation.element(el).get_attribute('outerHTML'))
         
         #js= 'document.querySelector("#modal-appointment > div > div.modal-container > div.modal-footer > button.btn.btn-gray.mr-2").click()'
         #self.driver.execute_script(js)
@@ -154,6 +159,7 @@ class Stenci:
         #self.interation.key(input_xpath, Keys.DOWN)
         #input('finalizar')
         #self.interation.key(input_xpath, 'enter')
+        
         
         
         
