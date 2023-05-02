@@ -31,6 +31,12 @@ def result():
 def teste():
     return render_template('teste.html')
 
+
+@app.route("/amil")
+def amil():
+    return render_template('amil.html')
+
+
 @app.route("/api/test")
 def test():
     for i in range(10):
@@ -61,8 +67,10 @@ def status_bot():
 
 if __name__ == "__main__":
     try:
-        
-        #print(app.config['TEMPLATES_AUTO_RELOAD'])
+        leo = True
+        if leo:
+            print(app.config['TEMPLATES_AUTO_RELOAD'])
+            
         app.run(debug=True)
         
         #server = Server(app.wsgi_app)

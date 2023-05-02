@@ -22,4 +22,4 @@ message.innerHTML = text
 setTimeout(() => {
 
     window.location.href = '/';
-}, 1000*10);
+}, 1000*20);

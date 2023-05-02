@@ -220,7 +220,8 @@ class Stenci:
             self.interation.click(el,  time=40)
         
         el = '//*[@id="modal-particular-account"]/div/div[2]/div[3]/button[1]'
-        self.interation.click(el,  time=40)
+        self.interation.click_js(el,  time=40)
+        time.sleep(2)
     
 if __name__ == '__main__':
      

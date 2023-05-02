@@ -1,4 +1,4 @@
-import time
+import time, re
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC 
@@ -98,3 +98,14 @@ class Interation:
         js = f'document.querySelector("{tag}").value = "{value}"'
         self.driver.execute_script(js)
         
+    
+    def cel(self, texto:str):
+        number = re.findall(r'\d+', texto)
+        number = ''.join(number)
+        number = str(int(number))
+        if len(number) != 11:
+            raise ValueError("O número de celular informado é inválido. Verifique se o número tem exatamente 11 dígitos.")
+        celular = number[2:]
+        ddd = number[:2] 
+        
+        return ddd, celular

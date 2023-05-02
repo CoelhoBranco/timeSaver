@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap"); 
-@import url('');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("");
 
 * {
     //background-color: #a00;
@@ -70,7 +70,8 @@ body {
         //text-align: center;
     }
 
-    input[type=text] {
+    input[type="text"],
+    input[type="number"] {
         margin-top: 30px;
         outline: 1px solid #03989e;
         border: 1px solid #fff;
@@ -79,11 +80,11 @@ body {
         height: 5vh;
         //margin-top: 10px;
         //outline: 1px solid ;
-        outline-offset: 13px ;
+        outline-offset: 13px;
         //padding-left: -10px;
     }
 
-    input[type=submit] {
+    input[type="submit"] {
         background: #03989e;
         border: 1px solid #03989e;
         border-radius: 10px;
@@ -92,22 +93,20 @@ body {
         width: 20vw;
         height: 10vh;
         margin-top: 50px;
-
-       
     }
-    input[type=submit]:hover{
+    input[type="submit"]:hover {
         background: #037074;
     }
-    input[type=text]:focus {
-       
+    input[type="text"]:focus {
         outline: 3px solid #037074;
     }
 }
-input[type=submit]:hover, button{
+input[type="submit"]:hover,
+button {
     background: #037074;
 }
 
-#player{
+#player {
     margin: 10px;
     position: relative;
     background-color: grey;
@@ -116,19 +115,25 @@ input[type=submit]:hover, button{
     z-index: 100000;
     border-radius: 10px;
 
-    background: #AAA9A9;
-border: 5px solid #000000;
-box-shadow: 0px 21px 14px rgba(0, 0, 0, 0.25);
-border-radius: 10px;
+    background: #aaa9a9;
+    border: 5px solid #000000;
+    box-shadow: 0px 21px 14px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
 
-span{
+span {
     text-align: center;
 }
 
-.message{
+.message {
     font-size: 16px;
     text-align: left;
     justify-self: flex-start;
     margin-left: 10px;
+}
+
+.content {
+    input[type=number] {
+        width: 40vw;
+    }
 }
