@@ -1,7 +1,8 @@
 import os
 import sys
 import time
-import logging
+
+
 
 from selenium import webdriver
 
@@ -28,15 +29,16 @@ sys.path.append(os.getcwd())
 from src.interation.login import Login
 
 from src.interation import Interation
+from src.bot.my_logger import get_logger
 
-logging.basicConfig(filename='logs.log', filemode='a',
-                    format='%(asctime)s - %(levelname)s - %(message)s',
-                    datefmt='%Y/%m/%d %I:%M:%S', level=logging.INFO, encoding="UTF-8")
 
+logger = get_logger()
 
 class Unimed:
     
-    def __init__(self, navegador = 'chrome', teste = None) -> None:
+    
+    
+    def __init__(self,user, password, navegador = 'chrome', teste = None) -> None:
         
        
         if navegador == 'chrome':
@@ -77,6 +79,9 @@ class Unimed:
         self.driver.get(self.host)
         
         #print(2)
+        
+        self.login(user, password)
+        self.page_exec()
         
     def login(self, user:str, password:str):
         
@@ -128,21 +133,19 @@ class Unimed:
             try:
                 self.interation.key(selector, 'home', method='id')
             except Exception as e:
-                logging.error(e)
+                logger.error(e)
                 #print(e)
             self.interation.write(selector, numbers[i], method='id')
         
             time.sleep(1)
+            
+            self.click_send()
+            
     
     def click_send(self):
         self.interation.click('//*[@id="ctl00_ctl00_conteudo_btnEnviar"]')
     
-    def load_extension(self):
-        
-        path = 'chrome-extension://moffahdcgnjnglbepimcggkjacdmpojc/' + self.host +'AutenticarBeneficiarioExecConsulta.aspx'
-        path = 'chrome-extension://moffahdcgnjnglbepimcggkjacdmpojc/ieability.html?url=https://autorizador.unimedcuritiba.com.br/LerBiometriaBeneficiario.aspx'
-        self.driver.get(path)
-        
+           
     def verify_page(self, param, time_break = 10):
         initial = time.time()
         
@@ -161,6 +164,7 @@ class Unimed:
     
     
     def set_value(self, value):
+        self.driver.get('https://autorizador.unimedcuritiba.com.br/DigitarConsulta32.aspx')
         selector = "ctl00_conteudo_txtNumeroGuiaPrestador"
         #self.interation.click(selector, method='id')
                 
@@ -189,7 +193,7 @@ class Unimed:
                 return True
                         
         except Exception as e:
-            logging.exception(e)
+            logger.exception(e)
         
         return False
         
@@ -209,34 +213,7 @@ class Unimed:
         
 if __name__ == '__main__':
     
-    """    
-        u = Unimed('chrome', True)
-        #('terminou de carregar') 
-        u.login('con2546', 'procto1200')
-        #('fechar')
-        u.page_exec()
-        #('fechar')
-        ##print(u.driver.current_url)
-        
-        u.select(medico)
-        u.set_beneficiary('00320000069749256')
-        u.click_send()
-        #u.load_extension()
-        #if u.verify_page('DigitarConsulta32.aspx'):
-            ##print('foi carregado a digital!')
-        u.driver.get('https://autorizador.unimedcuritiba.com.br/DigitarConsulta32.aspx')
-        u.click_send()
-                #('aperte enter')
-        try:
-            u.driver.get('https://autorizador.unimedcuritiba.com.br/DigitarConsulta32.aspx')
-            u.set_value(medico)
-        except Exception as e:
-            print(e)
-        u.click_final()
-        
-        
-        input('fechar')"""
-        
+            
     carteira = '00320000069749256'
     medico = 'DILERMANDO PEREIRA DE ALMEIDA NETO'
     def unimed(carteira, medico):
@@ -269,7 +246,7 @@ if __name__ == '__main__':
                 break
                 
             except Exception as e:
-                logging.exception(e)
+                logger.exception(e)
                 continue
     unimed(carteira, medico)
         

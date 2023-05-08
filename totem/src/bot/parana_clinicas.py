@@ -27,7 +27,7 @@ from src.interation.login import Login
 from src.interation import Interation
 
 
-class MedSenior:
+class ParanaClinicas:
     
     def __init__(self, teste = True):
         
@@ -36,6 +36,7 @@ class MedSenior:
         service = Service(executable_path=ChromeDriverManager().install())
         options = Options() 
         #options.page_load_strategy = 'none'
+        options.add_argument('--log-level=4')
         
         self.driver = webdriver.Chrome(service=service, options=options)
         if not teste :
@@ -128,12 +129,41 @@ class MedSenior:
         path_input ='/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/table[2]/tbody/tr/td[2]/input'
         self.i.write(path_input, doctor)
         self.i.click('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/table[3]/tbody/tr/td/input')
-
-    
-    def item_25(self, procedimento:str = '10101012'):
+        self.select_medico()
+        
+        self.driver.switch_to.default_content()
+        self.entrar_frame_content()
+        
+    def item_19(self, value = '225280'):
+        
+        
+        self.i.click('//*[@id="divGuiaSolicitacao"]/div[1]/table[10]/tbody/tr[2]/td[5]/input[3]')
+        
+        el = self.i.element('popupFrame', method='id')
+        self.driver.switch_to.frame(el)
+        
+        self.i.write('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/table[2]/tbody/tr/td[2]/input', value)
+        self.i.click('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/table[3]/tbody/tr/td/input')
+        self.i.click('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/table[5]/tbody/tr[2]/td[1]/input')
+        
+        self.i.click('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/div/input[2]')
+        
+        self.driver.switch_to.default_content()
+        self.entrar_frame_content()
+        
+        
+    def select_medico(self):
+        self.i.click('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/table[5]/tbody/tr[3]/td[1]/input')
+        self.i.click('/html/body/table/tbody/tr[2]/td/table/tbody/tr/td/form/div/input[2]')
+        
+    def item_25(self, procedimento:str = '10101012', descricao:str = 'Consulta em consultorio', quantidade=1):
         self.driver.switch_to.default_content()
         self.entrar_frame_content()
         self.i.write('//*[@id="tissItemProcediSolicitadoVO.codItem"]', procedimento)
+        self.i.write('//*[@id="tissItemProcediSolicitadoVO.desItem"]', descricao)
+        self.i.write('//*[@id="tissItemProcediSolicitadoVO.quantidadeSolicitada"]', quantidade)
+        self.i.click('//*[@id="imgSalvarProcedimentoSolicitado"]')
+        input('Enter')
         print('vez a inserção')
         
     def click_autorization_previa(self):
@@ -180,6 +210,9 @@ class MedSenior:
         xpath = '//*[@id="sm-16811448388603662-2"]/li[1]/a'
         self.i.click(xpath)
         
+    def item_31(self, CNES):
+        self.i.write('//*[@id="tissGuiaSolicitacaoSpSadtVO.tissContratadoExecutanteVO.numCnes"]', CNES)
+        
         
     def test_print(self):
         #self.driver.execute_script('window.print()')
@@ -196,20 +229,34 @@ class MedSenior:
             f.write(pdf_file.getbuffer())
         
         return True
+    
+    def item_13(self, value = 1253):
+        paths = ['//*[@id="tissGuiaSolicitacaoSpSadtVO.tissContratadoExecutanteVO.codPrestador"]',
+                 '//*[@id="tissGuiaSolicitacaoSpSadtVO.tissContratadoSolicitanteVO.codPrestador"]']
+       
+        for path in paths:
+            
+            self.i.element(path).clear()
+            self.i.write(path, value)
+        
         
 if __name__ == "__main__":
-    sul = MedSenior()
+    
+    sul = ParanaClinicas()
     print(1)
     
     sul.login('12553_atend', 'saudi@p')
 
     sul.click_services()
     sul.click_guia_consulta()
-    sul.insert_code()
-    sul.item_15('Dilermano')
-    sul.item_25()
-    sul.test_print()
+    sul.insert_code('1051112')
+    sul.item_13()
     
+    sul.item_15('Marcos de Abreu Bonardi')
+    #sul.test_print()
+    sul.item_19()
+    sul.item_25()
+    sul.item_31(55181288)
     #input('enter')
     #print(sul.interation.verify_page('home'))
     #sul.get('https://ptlmedsenior2.topsaude.com.br/PortalCredenciado/HomePortalCredenciado/Home/AreaLogada#PORCRED9_00')

@@ -1,10 +1,10 @@
 import os
+import re
 import sys
 import time
-import logging
+import getpass
 
 from selenium import webdriver
-
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
@@ -20,24 +20,34 @@ from src.interation.login import Login
 
 from src.interation import Interation
 
+from src.bot.my_logger import get_logger
+
+
+logging = get_logger()
+
 
 class MedSenior:
     
-    def __init__(self, teste = True):
+    def __init__(self, user, password, teste = True):
         
         #options = webdriver.ChromeOptions()
         
         service = Service(executable_path=ChromeDriverManager().install())
         options = Options() 
-        options.page_load_strategy = 'none'
+        options.page_load_strategy = 'normal'
+        
+        options.add_argument('--log-level=4')
         
         self.driver = webdriver.Chrome(service=service, options=options)
         if not teste :
             self.driver.minimize_window()
            
-        self.interation = Interation(self.driver)
+        self.i = Interation(self.driver)
         self.url = "https://ptlmedsenior2.topsaude.com.br/PortalCredenciado"
         self.driver.get(self.url)
+        
+        self.login(user, password)
+        self.click_incluir_pedido()
         
     def get(self, url):
         self.driver.get(url)    
@@ -47,18 +57,11 @@ class MedSenior:
         try:
             time.sleep(1)
             login = Login(self.driver)
-            
-            #self.skip_login()
-            #input('enter')
-            
-            
+                  
             login.set_user('usuario', user, method='id')
             
             
             login.set_password('senha', password,  method='id')
-            #if self.interation.locacated()
-            
-            #self.interation.click_js('//*[@id="login-submit"]')
             
             login.click_button('//*[@id="login-submit"]')
             
@@ -69,44 +72,39 @@ class MedSenior:
             return False
     
     def click_services(self):
-        self.interation.click('//*[@id="LumNav"]/li[2]/a')
+        self.i.click('//*[@id="LumNav"]/li[2]/a')
         
         
     def click_faturamento(self):
-        self.interation.click('//*[@id="prestadorMenuSeguradoPrincipal"]/div/div/div/div/div/div[2]/a')
+        self.i.click('//*[@id="prestadorMenuSeguradoPrincipal"]/div/div/div/div/div/div[2]/a')
         
     
     def click_guia_consulta(self):
-        self.interation.click('/html/body/div[1]/table[10]/tbody/tr/td[2]/table/tbody/tr[2]/td/div/div/div/div[3]/p[3]/a')
+        self.i.click('/html/body/div[1]/table[10]/tbody/tr/td[2]/table/tbody/tr[2]/td/div/div/div/div[3]/p[3]/a')
         
     
     def insert_code(self, value =  '111'):
         for i in range(1,6):
             xpath = f'//*[@id="codigo-beneficiario-{i}"]'
-            self.interation.write(xpath, 11)
+            self.i.write(xpath, 11)
             
-            
-        
-        
-        
-        
-        
+                
         return True
     
     
     def insert_atendimento(self, value):
         xpath = '//*[@id="inclusao-consulta-pedido"]/section/div/div/section/div[2]/as-tipo-pedido-autocomplete/div/div/input'
-        self.interation.locacated(xpath)
-        self.interation.write(xpath, value)
+        self.i.locacated(xpath)
+        self.i.write(xpath, value)
         #
-        # self.interation.write_js('#inclusao-consulta-pedido > section > div > div > section > div.tipo-pedido > as-tipo-pedido-autocomplete > div > div > input', value)
+        # self.i.write_js('#inclusao-consulta-pedido > section > div > div > section > div.tipo-pedido > as-tipo-pedido-autocomplete > div > div > input', value)
         
         return True
     
     
     def click_autorization_previa(self):
         try:
-            self.interation.element('//*[@id="menu-usuario"]/as-item-menu[3]/li/a')
+            self.i.element('//*[@id="menu-usuario"]/as-item-menu[3]/li/a')
             self.get('https://credenciado.MedSenior.com.br/pedidos-autorizacao')
             logging.info('clickado no auttorização previa com sucesso')
             
@@ -114,61 +112,106 @@ class MedSenior:
         except Exception as e:
             logging.error(e)
          
-    
     def click_incluir_pedido(self):
-        print('vai clicar')
-       
+        auth = "//a[contains(text(), 'Autorização')]"
+        self.i.click_js(auth)
         
-        xpath_menu = '//*[@id="sm-16811463678817988-1"]'
-        #16811458605225508
-        # id="sm-16811470290144385-1"
-        try:
-            #self.interation.click(xpath_menu)
-            
-            pass
-        except:
-            #input('deu erro')
-            pass
-        
-        el = self.interation.element('//*[@id="main-menu"]')
-        els = el.find_elements('xpath', '//li')
-        for el in els:
-            if 'Autorização' in el.get_attribute('outerHTML'):
-                el.click()
-                #print(el.get_attribute('outerHTML'))
-                
-        
-        js = 'document.querySelector("#sm-16811458605225508-1").mouseover()'
-        
-        self.driver.execute_script(js)
-        
-        # self.interation.click_js(xpath_menu)
-        # print('clicou')
-        
-        xpath = '//*[@id="sm-16811448388603662-2"]/li[1]/a'
-        self.interation.click(xpath)
-        
-        
+        pedido_path = "//a[contains(text(), 'Incluir Pedido')]"
+        self.i.click_js(pedido_path)
+        return True
     
     
+    def inserir_beneficiario(self, beneficiario):
+        self.entrar_iframe()
+        print('entrou no primeiro')
+        self.entrar_iframe()
+        print('entrou no segundo')
+        
+        input_xpath = '//*[@id="num_associado"]'
+        self.i.write(input_xpath, beneficiario, time=40)
+        self.i.key(input_xpath)
+        
+        
+        return True
+    
+    
+    
+    def inserir_cel(self, number=None):
+        #ddd, cel = self.i.cel(21999999) 
+        
+        ddd_path = '//*[@id="num_ddd_cel_contato"]'
+        cel_path = '//*[@id="num_cel_contato"]'
+        self.i.write(ddd_path, '')
+        self.i.write(cel_path, '')
+        
+        self.i.click_js('//*[@id="btnFecharContato"]')
+        
+        return True
+    
+    
+    def select_tipo(self):
+        select_element = self.i.element('//*[@id="ind_tipo_etapa"]', time=40)
+        select = Select(select_element)
+        select.select_by_visible_text('Solicitação de autorização pelo prestador executante')
+        return True
+    
+    def select_consulta(self):
+        self.i.click_js('//*[@id="ind_atendimento"]')
+        time.sleep(1)
+        return True
+
+    
+    def select_pedido_autorizacao(self):
+        self.i.click_js('//*[@id="ind_tipo_emissao_guia"]')
+        time.sleep(1)
+        return True
+    
+    def entrar_iframe(self, seletor = '//*[@id="principal2"]'):
+        iframe = self.i.element(seletor)
+        self.driver.switch_to.frame(iframe)
+    
+    def click_finalizar(self):
+        self.driver.switch_to.default_content()
+        
+        self.entrar_iframe()
+        
+        
+        iframe = self.i.element('//*[@id="toolbarMvcToAsp"]')
+        self.driver.switch_to.frame(iframe)
+        
+        self.i.click_js('//*[@id="btn_acao_incluir"]')
+        
+        self.driver.switch_to.default_content()
+        
+        self.entrar_iframe()
+        self.entrar_iframe()       
+        
+        self.i.click_js('//*[@id="ind_tipo_emissao_guia"]')
+        self.i.click_js('//*[@id="btnInclusaoViaPrestadorOK"]')
+        return True
+
+    def final(self):
+        self.select_tipo()
+        self.select_consulta()       
+        self.select_pedido_autorizacao()
+        self.click_finalizar()
+        
+        return True
+    
+        
+    
+
 if __name__ == "__main__":
-    sul = MedSenior()
-    print(1)
-    for i in range(6):
-        sul.login('0001852', 'P03340')
-        if not sul.driver.current_url == sul.url:
-            break
-        time.sleep(5)
-        
-         
-    #print(2)
+    med = MedSenior('0001852', 'P03340')
+    med.inserir_beneficiario('0645451')
+    med.inserir_cel('21974082703')
+    med.final()
     
-    #sul.get('https://ptlmedsenior2.topsaude.com.br/PortalCredenciado/HomePortalCredenciado/Home/AreaLogada')
-    sul.click_incluir_pedido()
+    
     #input('enter')
-    #print(sul.interation.verify_page('home'))
-    #sul.get('https://ptlmedsenior2.topsaude.com.br/PortalCredenciado/HomePortalCredenciado/Home/AreaLogada#PORCRED9_00')
-    # sul.click_autorization_previa()
-    # sul.insert_CPF('550628703')
-    # sul.insert_atendimento('consulta')
+    #print(med.interation.verify_page('home'))
+    #med.get('https://ptlmedsenior2.topsaude.com.br/PortalCredenciado/HomePortalCredenciado/Home/AreaLogada#PORCRED9_00')
+    # med.click_autorization_previa()
+    # med.insert_CPF('550628703')
+    # med.insert_atendimento('consulta')
     input('enter')

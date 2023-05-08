@@ -29,7 +29,7 @@ class sulAmerica:
         
         service = Service(executable_path=ChromeDriverManager().install())
         options = Options() 
-        options.page_load_strategy = 'none'
+        #options.page_load_strategy = 'normal'
         
         self.driver = webdriver.Chrome(service=service, options=options)
         if not teste :
@@ -44,16 +44,17 @@ class sulAmerica:
         return True
     
     def login(self, user, password):
-        el = self.interation.element('//*[@id="ServiceCommunityTemplate"]/div[1]/div/div[2]/div/div/c-e-m-e-d-login-container', method='xpath')
+        """el = self.interation.element('//*[@id="ServiceCommunityTemplate"]/div[1]/div/div[2]/div/div/c-e-m-e-d-login-container', method='xpath')
         self.driver.switch_to.frame(el)
         print('entrou no iframe')
-        
+        """
         login = Login(self.driver)
         input('leste')
-        self.interation.click('username', method='id')
-        login.set_user('username', user, method='id')
+        self.interation.click('//*[@id="ServiceCommunityTemplate"]/div[1]/div/div[2]/div/div/c-e-m-e-d-login-container/div/div/div[1]/div[1]/c-e-m-e-d-login/div/span/div/div', method='xpath')
+        print('clicou')
+        login.set_user('//*[@id="username-1"]', user)
                     
-        login.set_password('password', password,  method='id')
+        login.set_password('//*[@id="password-1"]', password)
         
         self.interation.click_js('//*[@id="ServiceCommunityTemplate"]/div[1]/div/div[2]/div/div/c-e-m-e-d-login-container/div/div/div[1]/div[1]/c-e-m-e-d-login/div/div[2]/button[2]')
         print('clickou')

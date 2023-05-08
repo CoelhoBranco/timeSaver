@@ -159,6 +159,10 @@ class Amil:
         #//*[@id="detalhes-autorizacao"]/menu-pedido/as-message/div
         
     
+    def verify_token(self):
+        self.i.element()
+        
+    
     
 if __name__ == "__main__":
     amil = Amil()

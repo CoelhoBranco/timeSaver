@@ -24,14 +24,14 @@ from src.interation import Interation
 
 class Amil:
     
-    def __init__(self, teste = True):
+    def __init__(self, user, password, teste = True):
         
         #options = webdriver.ChromeOptions()
         
         service = Service(executable_path=ChromeDriverManager().install())
         options = Options() 
         options.page_load_strategy = 'none'
-        
+        options.add_argument('--log-level=4')
         self.driver = webdriver.Chrome(service=service, options=options)
         if not teste :
             self.driver.minimize_window()
@@ -39,6 +39,8 @@ class Amil:
         self.i = Interation(self.driver)
         
         self.driver.get("https://credenciado.amil.com.br/login")
+        
+        self.login(user, password)
         
     def get(self, url):
         self.driver.get(url)    
@@ -153,7 +155,20 @@ class Amil:
         self.i.click_js('//*[@id="tour3-confirma"]/button')
         return True
         
+    
+    def verify_token(self):
+        response = self.i.element('//*[@id="detalhes-autorizacao"]/menu-pedido/as-message/div/p').text
         
+        if response == 'TOKEN inválido':
+            return False
+        
+        else:
+            return True
+        
+        
+      
+        
+          
     
     
 if __name__ == "__main__":

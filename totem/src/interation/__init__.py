@@ -63,6 +63,15 @@ class Interation:
         
         return element
     
+    
+    def elements(self, tag:str, time:int=15, method:str='xpath'):
+        
+        WebDriverWait(self.driver, time).until(
+                EC.presence_of_element_located((method, tag)))
+        elements = self.driver.find_elements(method, tag)
+        
+        return elements
+    
     def locacated(self, tag:str, time:int=15, method:str='xpath'):
         if self.element(tag, time, method):
             return True

@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import logging
+import datetime
 
 from selenium import webdriver
 
@@ -17,9 +18,10 @@ from selenium.webdriver.common.by import By
 sys.path.append(os.getcwd())
 
 from src.interation.login import Login
-
 from src.interation import Interation
+from src.bot.my_logger import get_logger
 
+logger = get_logger()
 
 class sulAmerica:
     
@@ -30,12 +32,13 @@ class sulAmerica:
         service = Service(executable_path=ChromeDriverManager().install())
         options = Options() 
         options.page_load_strategy = 'none'
+        options.add_argument('--log-level=4')
         
         self.driver = webdriver.Chrome(service=service, options=options)
         if not teste :
             self.driver.minimize_window()
            
-        self.interation = Interation(self.driver)
+        self.i = Interation(self.driver)
         
         self.driver.get("https://saude.sulamericaseguros.com.br/prestador/login/")
         
@@ -55,9 +58,9 @@ class sulAmerica:
             
             
             login.set_password('senha', password,  method='id')
-            #if self.interation.locacated()
+            #if self.i.locacated()
             
-            self.interation.click_js('//*[@id="entrarLogin"]')
+            self.i.click_js('//*[@id="entrarLogin"]')
             print('clickou')
             #login.click_button('/html/body/as-main-app/as-login-container/div[1]/div/as-login/div[2]/form/fieldset/button')
             
@@ -68,44 +71,44 @@ class sulAmerica:
             return False
     
     def click_services(self):
-        self.interation.click('//*[@id="LumNav"]/li[2]/a')
+        self.i.click('//*[@id="LumNav"]/li[2]/a')
         
         
     def click_faturamento(self):
-        self.interation.click('//*[@id="prestadorMenuSeguradoPrincipal"]/div/div/div/div/div/div[2]/a')
+        self.i.click('//*[@id="prestadorMenuSeguradoPrincipal"]/div/div/div/div/div/div[2]/a')
         
     
     def click_guia_consulta(self):
-        self.interation.click('/html/body/div[1]/table[10]/tbody/tr/td[2]/table/tbody/tr[2]/td/div/div/div/div[3]/p[3]/a')
+        self.i.click('/html/body/div[1]/table[10]/tbody/tr/td[2]/table/tbody/tr[2]/td/div/div/div/div[3]/p[3]/a')
         
     
-    def insert_code(self, value =  '111'):
-        for i in range(1,6):
-            xpath = f'//*[@id="codigo-beneficiario-{i}"]'
-            self.interation.write(xpath, 11)
+    def insert_code(self, value =  '11122222333355556666'):
+        beneficiario = [0, value[:3], value[3:8], value[8:12], value[12:16], value[16:20]]
+        #for i in range(1,6):
+        beneficiario = value
+        xpath = f'//*[@id="codigo-beneficiario-1"]'
+        logger.info(xpath)      
+        
+        self.i.write(xpath, beneficiario)
             
-            
-        
-        
-        
-        
-        
         return True
     
+    def click_confirma(self):
+        self.i.click_js('//*[@id="Form_8A61F5C6407D868201407DAA886A1760"]/div/div/div/div[2]/div[3]/div[3]/button[1]')
     
     def insert_atendimento(self, value):
         xpath = '//*[@id="inclusao-consulta-pedido"]/section/div/div/section/div[2]/as-tipo-pedido-autocomplete/div/div/input'
-        self.interation.locacated(xpath)
-        self.interation.write(xpath, value)
+        self.i.locacated(xpath)
+        self.i.write(xpath, value)
         #
-        # self.interation.write_js('#inclusao-consulta-pedido > section > div > div > section > div.tipo-pedido > as-tipo-pedido-autocomplete > div > div > input', value)
+        # self.i.write_js('#inclusao-consulta-pedido > section > div > div > section > div.tipo-pedido > as-tipo-pedido-autocomplete > div > div > input', value)
         
         return True
     
     
     def click_autorization_previa(self):
         try:
-            self.interation.element('//*[@id="menu-usuario"]/as-item-menu[3]/li/a')
+            self.i.element('//*[@id="menu-usuario"]/as-item-menu[3]/li/a')
             self.get('https://credenciado.sulAmerica.com.br/pedidos-autorizacao')
             logging.info('clickado no auttorização previa com sucesso')
             
@@ -113,6 +116,87 @@ class sulAmerica:
         except Exception as e:
             logging.error(e)
          
+    def insert_medico(self, medico):
+        self.i.write('//*[@id="nome"]', medico)
+        
+    def select_conselho(self, conselho = "CRM"):
+        options = self.i.element('//*[@id="conselho-profissional"]', time=40)
+        select = Select(options)
+        select.select_by_visible_text(conselho)
+        
+    def select_state(self, state='PR'):
+        options = self.i.element('//*[@id="uf-conselho-profissional"]', time=40)
+        select = Select(options)
+        select.select_by_visible_text(state)
+        
+    def insert_registro_conselho(self, code):
+        self.i.write('//*[@id="numero-registro-conselho"]', code)
+        
+    def insert_cbo(self, cbo):
+        path = '//*[@id="cbo"]'
+        self.i.write(path, cbo)
+        time.sleep(1)
+        self.i.element(path).send_keys(Keys.DOWN)
+        self.i.element(path).send_keys(Keys.ENTER)
+        #self.i.key(path)
+        #input('continuar')
+        #self.i.click('//*[@id="ui-id-17"]')
+        #input('continuar')
+        #self.i.key('//*[@id="cbo"]')
+        
+    
+    def select_acidente(self, value ='Não Acidente'):
+        options = self.i.element('//*[@id="indicador-acidente"]', time=40)
+        select = Select(options)
+        select.select_by_visible_text(value)
+        
+    def insert_data(self):
+        date = datetime.date.today().strftime('%d%m%Y')
+        self.i.write('//*[@id="data-atendimento"]', date)
+        return True
+    
+    def select_consulta(self, value= "Primeira Consulta"):
+        options = self.i.element('//*[@id="tipo-consulta"]', time=40)
+        select = Select(options)
+        select.select_by_visible_text(value)
+        
+    def select_rn(self, value = 'Não'):
+        options = self.i.element('//*[@id="flag-atendimento-rn"]', time=40)
+        select = Select(options)
+        select.select_by_visible_text(value)
+        
+    def select_regime_atendimento(self, value = 'Ambulatorial'):
+        options = self.i.element('//*[@id="regime-atendimento"]', time=40)
+        select = Select(options)
+        select.select_by_visible_text(value)
+        
+    def insert_valor_procedimento(self, valor='11000'):
+        self.i.write('//*[@id="valor-procedimento"]', valor)
+        
+    def click_confirma_final(self):
+        self.i.click_js('//*[@id="Form_8A61F5C6407D868201407DAA95421826"]/div/div/div/div[7]/div[4]/a[1]')
+    
+    def get_code(self):
+        el = self.i.element('//*[@id="1683561440589"]/div/table/tbody/tr/td/div[1]/div/div/div[2]/table/tbody/tr/td/div/b')
+        return el.text
+        
+    
+    def exec_dados_atendimento(self, medico, conselho, code, cbo, uf= "PR"):
+        self.insert_medico(medico)        
+        self.select_conselho(conselho)
+        self.select_state(uf)
+        self.insert_registro_conselho(code)
+        self.insert_cbo(cbo)
+        
+        self.select_acidente()
+        self.insert_data()    
+        self.select_consulta()
+        self.select_rn()
+        self.select_regime_atendimento()
+        self.insert_valor_procedimento()
+        
+        #self.click_confirma_final()
+        
         
         
     
@@ -125,7 +209,13 @@ if __name__ == "__main__":
     sul.click_services()
     sul.click_faturamento()
     sul.click_guia_consulta()
-    sul.insert_code()
+    sul.insert_code('55788888477531520020')
+    sul.click_confirma()
+    
+    sul.exec_dados_atendimento('Marcos de Abreu Bonardi', 'CRM', '17741','225280', uf= "PR")
+    
+    
+    
     
     #input('enter')
     #print(sul.interation.verify_page('home'))

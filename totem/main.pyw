@@ -32,9 +32,19 @@ def teste():
     return render_template('teste.html')
 
 
-@app.route("/amil")
+@app.route("/amil_token")
 def amil():
     return render_template('amil.html')
+
+
+@app.route("/api/write-token", methods=["GET"])
+def write_token():
+    token = request.args.get("token") # Obtém o valor do token do parâmetro "token" na URL
+    data = {"token": token}
+    with open("config/token.json", "w") as f:
+        json.dump(data, f)
+    return {"code": 200, "message": "Token escrito com sucesso!"}
+
 
 
 @app.route("/api/test")
@@ -70,7 +80,7 @@ if __name__ == "__main__":
         leo = True
         if leo:
             print(app.config['TEMPLATES_AUTO_RELOAD'])
-            
+        app.logger.setLevel(logging.ERROR)    
         app.run(debug=True)
         
         #server = Server(app.wsgi_app)

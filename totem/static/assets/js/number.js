@@ -182,7 +182,8 @@ const Keyboard = {
 
 window.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
-    Keyboard.open();
+    //Keyboard.open();
 
     
 });
+
