@@ -22,14 +22,14 @@
 <body>
     <header>
         <a href="/index">
-            <img src={{ url_for('static', filename='assets/img/logo.png' ) }} alt="logo da empresa" srcset="">
+            <img src="{{ url_for('static', filename='assets/img/logo.png' ) }}" alt="logo da empresa" srcset="">
         </a>
         <h1>Bem vindo</h1>
     </header>
     <div class="content">
         <div class="inputs">
             <label for="user">Nome Completo</label>
-            <input type="text" id='name' class="use-keyboard-input">
+            <input type="text" id='name' value="Mariele Teixeira de Souza" class="use-keyboard-input">
         </div>
         <input type="submit" id='btn' value="Iniciar">
     </div>

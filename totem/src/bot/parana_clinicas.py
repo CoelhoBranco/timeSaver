@@ -17,7 +17,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.print_page_options import PrintOptions
 from selenium.webdriver.common.alert import Alert
 
-    
+import logging as log
+
+os.environ['WDM_LOG'] = str(log.NOTSET)
   
 
 sys.path.append(os.getcwd())
@@ -29,7 +31,7 @@ from src.interation import Interation
 
 class ParanaClinicas:
     
-    def __init__(self, teste = True):
+    def __init__(self,user, password, teste = True):
         
         #options = webdriver.ChromeOptions()
         
@@ -45,6 +47,10 @@ class ParanaClinicas:
         self.i = Interation(self.driver)
         self.url = "https://paranaclinicas.saudi.com.br/saudi/welcome.do?task=abreLogin"
         self.driver.get(self.url)
+        
+        self.login(user, password)
+        self.click_services()
+        self.click_guia_consulta()
         
     def get(self, url):
         self.driver.get(url)    
@@ -238,25 +244,24 @@ class ParanaClinicas:
             
             self.i.element(path).clear()
             self.i.write(path, value)
+    
+    def exec(self, carteira, medico, CNES ):
+        self.insert_code(carteira)
+        self.item_13()
+        self.item_15(medico)
+        self.item_19()
+        self.item_25()
+        self.item_31(CNES)
         
         
 if __name__ == "__main__":
     
-    sul = ParanaClinicas()
-    print(1)
+    a = ParanaClinicas('12553_atend', 'saudi@p')
+   
+ 
     
-    sul.login('12553_atend', 'saudi@p')
-
-    sul.click_services()
-    sul.click_guia_consulta()
-    sul.insert_code('1051112')
-    sul.item_13()
     
-    sul.item_15('Marcos de Abreu Bonardi')
-    #sul.test_print()
-    sul.item_19()
-    sul.item_25()
-    sul.item_31(55181288)
+    
     #input('enter')
     #print(sul.interation.verify_page('home'))
     #sul.get('https://ptlmedsenior2.topsaude.com.br/PortalCredenciado/HomePortalCredenciado/Home/AreaLogada#PORCRED9_00')

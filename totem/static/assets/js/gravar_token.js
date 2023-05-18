@@ -14,12 +14,17 @@ iniciar.addEventListener("click", function (e) {
   setInterval(async function () {
     let url = await fetch('api/status-bot').then(T => T.json());
 
-    if (url.code != 100) {
+    if (url.code != 100 && url.statusCode != 400) {
+      localStorage.setItem('status-bot', url.code)
+      //window.location.href = '/result';
+
+    }
+    if (url.code == 200 || url.statusCode == 300) {
       localStorage.setItem('status-bot', url.code)
       window.location.href = '/result';
 
     }
-
+    
     localStorage.setItem('status-bot', url.code)
 
     //window.location.href = '/video';

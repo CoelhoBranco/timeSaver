@@ -118,3 +118,15 @@ class Interation:
         ddd = number[:2] 
         
         return ddd, celular
+    
+    
+    if __name__ == '__main__':
+        def main(test:str):
+            if type(test) == str:
+                print('é bool')
+            print(type(test))
+            
+            print('é boll' + test)
+            
+        main(True)
+    

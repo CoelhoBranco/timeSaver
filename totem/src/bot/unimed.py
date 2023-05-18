@@ -31,6 +31,9 @@ from src.interation.login import Login
 from src.interation import Interation
 from src.bot.my_logger import get_logger
 
+import logging as log
+
+os.environ['WDM_LOG'] = str(log.NOTSET)
 
 logger = get_logger()
 
