@@ -25,8 +25,12 @@ from src.interation.login import Login
 
 from src.interation import Interation
 
+<<<<<<< HEAD
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
+=======
+
+>>>>>>> 008eacfa0f8bee74eb598b5a3ad3a27f6c02d807
 
 
 class Imprimir:
@@ -35,6 +39,7 @@ class Imprimir:
         
         #options = webdriver.ChromeOptions()
         
+<<<<<<< HEAD
         if False:
             service = Service(executable_path=ChromeDriverManager().install())
             options = Options() 
@@ -52,12 +57,27 @@ class Imprimir:
             pass
         print('1')
                
+=======
+        
+        service = Service(executable_path=ChromeDriverManager().install())
+        options = Options() 
+        options.page_load_strategy = 'normal'
+        options.add_argument('--log-level=4')
+        self.driver = webdriver.Chrome(service=service, options=options)
+        
+     
+>>>>>>> 008eacfa0f8bee74eb598b5a3ad3a27f6c02d807
         if not teste :
             self.driver.minimize_window()
            
         self.i = Interation(self.driver)
+<<<<<<< HEAD
         print('carregou a pagina')
         self.driver.get("http://localhost:5000/teste")
+=======
+        
+        self.driver.get("http://127.0.0.1:5000/teste")
+>>>>>>> 008eacfa0f8bee74eb598b5a3ad3a27f6c02d807
         print('carregou a pagina')
         
     
@@ -69,12 +89,19 @@ class Imprimir:
 }, 10000); // 10000 milisegundos = 10 segundos
         '''
         #self.driver.execute_async_script(js)
+<<<<<<< HEAD
         print('click em imprimir')
         self.i.click('//*[@id="imprimir"]')
         #self.i.click_js('//*[@id="sidebar"]//print-preview-button-strip//div/cr-button[1]')
         self.driver.window_handles
         print('print da janelas')
         print(self.driver.window_handles)
+=======
+        
+        self.i.click('//*[@id="imprimir"]')
+        self.i.click_js('//*[@id="sidebar"]//print-preview-button-strip//div/cr-button[1]')
+        self.driver.window_handles[-1]
+>>>>>>> 008eacfa0f8bee74eb598b5a3ad3a27f6c02d807
         print('print das janelas')
         
     def mudar_janela(self):

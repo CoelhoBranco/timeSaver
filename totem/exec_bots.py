@@ -180,6 +180,7 @@ def exec_medSenior(data:IStenci):
     logging.info(result)
     # input('aperte enter para continuar')
     #status(200)
+    #status(400)
     return result
 
 
