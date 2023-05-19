@@ -75,18 +75,27 @@ def status_bot():
     return file
 
 
+@app.route("/api/reset-status-bot")
+def reset_status_bot():
+    with open('status.json', 'w') as f:
+        json.dump({"code": 100}, f)
+    return {"code": 200, "message": "status resetado com sucesso"}
+
+
+
+
 if __name__ == "__main__":
-    try:
+    #try:
         leo = True
         if leo:
             print(app.config['TEMPLATES_AUTO_RELOAD'])
-        app.logger.setLevel(logging.ERROR)    
+        #app.logger.setLevel(logging.ERROR)    
         app.run(debug=True)
         
         #server = Server(app.wsgi_app)
         #server.serve()
-    except Exception as e:
-        print(e)
+    #except Exception as e:
+     #   print(e)
     
     
     

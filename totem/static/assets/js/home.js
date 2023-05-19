@@ -1,4 +1,9 @@
 let btn = document.getElementById('btn');
+async function main(){
+    let url = await fetch('/api/reset-status-bot').then(T => T.json()); 
+    console.log(url);
+}
+
 
 btn.onclick = async function() {
     let name = document.querySelector('#name').value;
@@ -11,3 +16,4 @@ btn.onclick = async function() {
     
 }
 
+ main();

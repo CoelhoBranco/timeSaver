@@ -10,8 +10,8 @@ def get_logger(name = getpass.getuser()):
     formatter = logging.Formatter(log_format, datefmt='%Y/%m/%d %I:%M:%S')
 
     # Cria um handler para salvar as mensagens do log em um arquivo
-    file_handler = logging.FileHandler(f'{name}.log')
-    file_handler.setLevel(logging.DEBUG)
+    file_handler = logging.FileHandler(f'{name}.log', encoding='utf-8')
+    file_handler.setLevel(logging.INFO)
     file_handler.setFormatter(formatter)
 
     # Cria um handler para imprimir as mensagens do log no console

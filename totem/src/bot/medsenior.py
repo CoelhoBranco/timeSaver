@@ -13,6 +13,9 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
+import logging as log
+
+os.environ['WDM_LOG'] = str(log.NOTSET)
 
 sys.path.append(os.getcwd())
 

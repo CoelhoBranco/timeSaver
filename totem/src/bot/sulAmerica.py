@@ -3,6 +3,7 @@ import sys
 import time
 import logging
 import datetime
+import traceback
 
 from selenium import webdriver
 
@@ -14,6 +15,9 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
+import logging as log
+
+os.environ['WDM_LOG'] = str(log.NOTSET)
 
 sys.path.append(os.getcwd())
 
@@ -21,18 +25,19 @@ from src.interation.login import Login
 from src.interation import Interation
 from src.bot.my_logger import get_logger
 
-logger = get_logger()
+
 
 class sulAmerica:
-    
-    def __init__(self, teste = True):
+    logger = get_logger()
+
+    def __init__(self, code, user, password, teste = True):
         
         #options = webdriver.ChromeOptions()
         
         service = Service(executable_path=ChromeDriverManager().install())
         options = Options() 
         options.page_load_strategy = 'none'
-        options.add_argument('--log-level=4')
+        #options.add_argument('--log-level=4')
         
         self.driver = webdriver.Chrome(service=service, options=options)
         if not teste :
@@ -41,6 +46,9 @@ class sulAmerica:
         self.i = Interation(self.driver)
         
         self.driver.get("https://saude.sulamericaseguros.com.br/prestador/login/")
+        
+        self.login(code, user, password)
+        self.start()
         
     def get(self, url):
         self.driver.get(url)    
@@ -67,7 +75,7 @@ class sulAmerica:
             return True
 
         except Exception as e:
-            logging.error(e)
+            self.logger.error(e)
             return False
     
     def click_services(self):
@@ -87,9 +95,11 @@ class sulAmerica:
         #for i in range(1,6):
         beneficiario = value
         xpath = f'//*[@id="codigo-beneficiario-1"]'
-        logger.info(xpath)      
+        self.logger.info(xpath)      
         
         self.i.write(xpath, beneficiario)
+        
+        self.click_confirma()
             
         return True
     
@@ -110,11 +120,11 @@ class sulAmerica:
         try:
             self.i.element('//*[@id="menu-usuario"]/as-item-menu[3]/li/a')
             self.get('https://credenciado.sulAmerica.com.br/pedidos-autorizacao')
-            logging.info('clickado no auttorização previa com sucesso')
+            self.logger.info('clickado no auttorização previa com sucesso')
             
             return True
         except Exception as e:
-            logging.error(e)
+            self.logger.error(e)
          
     def insert_medico(self, medico):
         self.i.write('//*[@id="nome"]', medico)
@@ -177,44 +187,65 @@ class sulAmerica:
         self.i.click_js('//*[@id="Form_8A61F5C6407D868201407DAA95421826"]/div/div/div/div[7]/div[4]/a[1]')
     
     def get_code(self):
-        el = self.i.element('//*[@id="1683561440589"]/div/table/tbody/tr/td/div[1]/div/div/div[2]/table/tbody/tr/td/div/b')
+        el = self.i.element('//tbody/tr/td/div/b')
         return el.text
-        
+
+    
+    def start(self):
+        self.click_services()
+        self.click_faturamento()
+        self.click_guia_consulta()
     
     def exec_dados_atendimento(self, medico, conselho, code, cbo, uf= "PR"):
-        self.insert_medico(medico)        
-        self.select_conselho(conselho)
-        self.select_state(uf)
-        self.insert_registro_conselho(code)
-        self.insert_cbo(cbo)
-        
-        self.select_acidente()
-        self.insert_data()    
-        self.select_consulta()
-        self.select_rn()
-        self.select_regime_atendimento()
-        self.insert_valor_procedimento()
-        
-        #self.click_confirma_final()
-        
+        try:
+            try:
+                self.insert_medico(medico)        
+                self.select_conselho(conselho)
+                self.select_state(uf)
+                self.insert_registro_conselho(code)
+                self.insert_cbo(cbo)
+            except Exception as e:
+                tb_info = traceback.format_exc()
+                mensagem_erro = f"Ocorreu um erro: {e}\nTraceback:\n{tb_info}"
+                self.logger.exception(mensagem_erro)
+
+            try:
+                self.select_acidente()
+                self.insert_data()    
+                self.select_consulta()
+                self.select_rn()
+                self.select_regime_atendimento()
+                self.insert_valor_procedimento()
+            except Exception as e:
+                tb_info = traceback.format_exc()
+                mensagem_erro = f"Ocorreu um erro: {e}\nTraceback:\n{tb_info}"
+                self.logger.exception(mensagem_erro)
+
+            self.click_confirma_final()
+            code = self.get_code()
+            return code
+        except Exception as e:
+                tb_info = traceback.format_exc()
+                mensagem_erro = f"Ocorreu um erro: {e}\nTraceback:\n{tb_info}"
+                self.logger.exception(mensagem_erro)
+                
         
         
     
     
 if __name__ == "__main__":
-    sul = sulAmerica()
-    print(1)
-    sul.login('100000009361', 'master', '837543')
+    sul = sulAmerica('100000009361', 'master', '837543')
+    #print(1)
+    #sul.login()
     #print(2)
-    sul.click_services()
-    sul.click_faturamento()
-    sul.click_guia_consulta()
-    sul.insert_code('55788888477531520020')
-    sul.click_confirma()
+   
+   
+    sul.insert_code('58201333000059520012')
+ 
     
-    sul.exec_dados_atendimento('Marcos de Abreu Bonardi', 'CRM', '17741','225280', uf= "PR")
+    code = sul.exec_dados_atendimento('Marcos de Abreu Bonardi', 'CRM', '17741','225280',"PR")
     
-    
+    print(code)
     
     
     #input('enter')
