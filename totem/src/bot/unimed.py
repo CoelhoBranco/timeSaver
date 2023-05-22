@@ -35,10 +35,10 @@ import logging as log
 
 os.environ['WDM_LOG'] = str(log.NOTSET)
 
-logger = get_logger()
+
 
 class Unimed:
-    
+    logger = get_logger()
     
     
     def __init__(self,user, password, navegador = 'chrome', teste = None) -> None:
@@ -136,7 +136,7 @@ class Unimed:
             try:
                 self.interation.key(selector, 'home', method='id')
             except Exception as e:
-                logger.error(e)
+                self.logger.error(e)
                 #print(e)
             self.interation.write(selector, numbers[i], method='id')
         
@@ -196,7 +196,7 @@ class Unimed:
                 return True
                         
         except Exception as e:
-            logger.exception(e)
+            self.logger.exception(e)
         
         return False
         
@@ -249,7 +249,7 @@ if __name__ == '__main__':
                 break
                 
             except Exception as e:
-                logger.exception(e)
+                self.logger.exception(e)
                 continue
     unimed(carteira, medico)
         
